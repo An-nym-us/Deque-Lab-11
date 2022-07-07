@@ -73,14 +73,11 @@ public:
    class iterator;
    iterator begin()
    {
-      
-      T* ptr = &this->front();
-      std::cout << ptr << std::endl;
-      return  ptr;
+      return iterator(this, this->iaFront);
    }
    iterator end()
    {
-      return iterator();
+      return iterator(this, this->numElements);
    }
 
    //

@@ -21,6 +21,8 @@
 
 // Debug stuff
 #include <cassert>
+#include <iostream>
+#include <deque>
 
 class TestDeque;    // forward declaration for TestDeque unit test class
 
@@ -71,7 +73,10 @@ public:
    class iterator;
    iterator begin()
    {
-      return iterator();
+      
+      T* ptr = &this->front();
+      std::cout << ptr << std::endl;
+      return  ptr;
    }
    iterator end()
    {
@@ -123,9 +128,12 @@ private:
    // fetch array index from the deque index
    int iaFromID(int id) const
    {
-      int ia = (id+this->iaFront)% numCapacity;
+      int ia = (id + this->iaFront) % numCapacity;
+      //int ia = (id + this->iaFront);
       return ia ;
    }
+
+
    void resize(int newCapacity = 0);
 
    // member variables
@@ -272,16 +280,55 @@ template <class T>
 deque <T> & deque <T> :: operator = (const deque <T> & rhs)
 {
    int tempCapacity = (int)numCapacity;
-   this->clear();
-
-   
-   if(rhs.size() > tempCapacity)
+   //this->clear();
+   if (rhs.size() > tempCapacity)
       resize((int)rhs.numCapacity);
    else
       resize(tempCapacity);
+
+   //if (rhs.numCapacity == numCapacity)
+   //{
+   //   
+   //   for (int i = 0; i < rhs.size(); i++)
+   //   {
+   //      data[i] = rhs.data[i];
+   //      std::cout << rhs.data[1] << "umber" << std::endl;
+   //   }
+   //      
+   //   return *this;
+
+   //}
+   for (int i = 0; i < rhs.size(); i++)
+   {
+
+      //data[i] = rhs.data[i];
+      std::cout << rhs.data[i] << "umber" << i << std::endl;
+      //std::cout << data[i] << "umber" << std::endl;
+   }
+
+   for (int i = 0; i < rhs.size(); i++)
+   {
+
+      //data[i] = rhs.data[i];
+      std::cout << data[i] << "umber" << i << std::endl;
+      //std::cout << data[i] << "umber" << std::endl;
+   }
+
       
-   for(int i =0; i < rhs.size(); i++)
-         data[i] = rhs.data[i];
+   for (int i = 0; i < rhs.size(); i++)
+   {
+      
+      data[i] = rhs.data[i];
+      //std::cout << rhs.data[i] << "umber" << std::endl;
+      //std::cout << data[i] << "umber" << std::endl;
+   }
+   for (int i = 0; i < rhs.size(); i++)
+   {
+
+      //data[i] = rhs.data[i];
+      std::cout << data[i] << "umber" << i << std::endl;
+      //std::cout << data[i] << "umber" << std::endl;
+   }
    
    numElements = rhs.numElements;
       

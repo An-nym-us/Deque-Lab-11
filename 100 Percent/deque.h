@@ -125,7 +125,13 @@ private:
    // fetch array index from the deque index
    int iaFromID(int id) const
    {
-      int ia = (id + this->iaFront) % numCapacity;
+      int ia = 0;
+      if (this->iaFront >= 0)
+      {
+         ia = (id + this->iaFront) % numCapacity;
+         return ia;
+      }
+
       //int ia = (id + this->iaFront);
       return ia ;
    }
@@ -299,7 +305,7 @@ deque <T> & deque <T> :: operator = (const deque <T> & rhs)
    {
 
       //data[i] = rhs.data[i];
-      std::cout << rhs.data[i] << "umber" << i << std::endl;
+     // std::cout << rhs.data[i] << "umber" << i << std::endl;
       //std::cout << data[i] << "umber" << std::endl;
    }
 
@@ -307,7 +313,7 @@ deque <T> & deque <T> :: operator = (const deque <T> & rhs)
    {
 
       //data[i] = rhs.data[i];
-      std::cout << data[i] << "umber" << i << std::endl;
+    //  std::cout << data[i] << "umber" << i << std::endl;
       //std::cout << data[i] << "umber" << std::endl;
    }
 
@@ -323,7 +329,7 @@ deque <T> & deque <T> :: operator = (const deque <T> & rhs)
    {
 
       //data[i] = rhs.data[i];
-      std::cout << data[i] << "umber" << i << std::endl;
+   //   std::cout << data[i] << "umber" << i << std::endl;
       //std::cout << data[i] << "umber" << std::endl;
    }
    

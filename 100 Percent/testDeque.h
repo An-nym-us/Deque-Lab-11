@@ -27,28 +27,28 @@ public:
       reset();
 
       // Utilities
-      //test_iaFromID_trivial();
-      //test_iaFromID_slided();
-      //test_iaFromID_wrapped();
-      //             test_iaFromID_negSlide();
+      test_iaFromID_trivial();
+      test_iaFromID_slided();
+      test_iaFromID_wrapped();
+                   test_iaFromID_negSlide();
 
       // //Construct
-      //test_construct_default();
-      //test_constructCopy_empty();
-      //test_constructCopy_standard();
+      test_construct_default();
+      test_constructCopy_empty();
+      test_constructCopy_standard();
 
       //// Assign
-      //test_assign_emptyToEmpty();
-      //test_assign_standardToEmpty();
-      //test_assign_emptyToStandard();
-      //test_assign_smallToBig();
-      //test_assign_bigToSmall();
-                //test_assign_unwrap();
-//                test_assign_unwrapNegative();
+      test_assign_emptyToEmpty();
+      test_assign_standardToEmpty();
+      test_assign_emptyToStandard();
+      test_assign_smallToBig();
+      test_assign_bigToSmall();
+               // test_assign_unwrap();
+             //  test_assign_unwrapNegative();
 
       // Iterator
-               test_begin_standard();
-               test_end_standard();
+      test_begin_standard();
+      test_end_standard();
       test_iterator_increment_standardMiddle();
       test_iterator_dereferenceRead_standard();
       test_iterator_dereferenceRead_wrap();

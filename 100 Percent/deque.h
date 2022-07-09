@@ -22,6 +22,8 @@
 #include <iostream>
 // Debug stuff
 #include <cassert>
+#include <iostream>
+#include <deque>
 
 class TestDeque;    // forward declaration for TestDeque unit test class
 
@@ -132,6 +134,8 @@ private:
       int ia = (id+temp)% numCapacity;
       return ia ;
    }
+
+
    void resize(int newCapacity = 0);
 
    // member variables

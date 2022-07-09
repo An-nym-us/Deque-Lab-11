@@ -18,7 +18,8 @@
  ************************************************************************/
 
 #pragma once
-
+#include <cstdlib>
+#include <iostream>
 // Debug stuff
 #include <cassert>
 
@@ -71,11 +72,11 @@ public:
    class iterator;
    iterator begin()
    {
-      return iterator();
+      return iterator(this, this->iaFront);
    }
    iterator end()
    {
-      return iterator();
+      return iterator(this,(int)this->numElements);
    }
 
    //
@@ -123,7 +124,12 @@ private:
    // fetch array index from the deque index
    int iaFromID(int id) const
    {
-      int ia = (id+this->iaFront)% numCapacity;
+      int temp = (int)(this->iaFront + numElements);
+      
+      if (temp < 0)
+         temp = - temp;
+      
+      int ia = (id+temp)% numCapacity;
       return ia ;
    }
    void resize(int newCapacity = 0);
@@ -271,19 +277,45 @@ deque <T> :: deque(const deque <T> & rhs):numElements(0), numCapacity(0), data(N
 template <class T>
 deque <T> & deque <T> :: operator = (const deque <T> & rhs)
 {
+   iaFront = rhs.iaFront;
    int tempCapacity = (int)numCapacity;
    this->clear();
 
-   
+
    if(rhs.size() > tempCapacity)
       resize((int)rhs.numCapacity);
    else
       resize(tempCapacity);
-      
-   for(int i =0; i < rhs.size(); i++)
-         data[i] = rhs.data[i];
    
+   int tempIaFront = rhs.iaFront;
+   int count = 0;
+   
+   if(rhs.iaFront >=0 && rhs.iaFront <(int)rhs.numElements)
+   {
+      while(count < rhs.numElements)
+      {
+         if (tempIaFront >= numElements)
+            data[count] = rhs.data[tempIaFront % rhs.numElements];
+         else
+            data[count] = rhs.data[tempIaFront];
+      
+         tempIaFront++;
+         count++;
+      }
+   }
+   else {
+      for(int i = ((int)rhs.numElements)-1; i>=0; i--)
+      {
+         int tempIdx = iaFromID(i);
+         data[tempIdx] = rhs.data[i];
+      }
+   }
+   
+
    numElements = rhs.numElements;
+   iaFront  =0;
+   
+   
       
    return *this;
 }
@@ -311,7 +343,7 @@ T& deque <T> ::front()
 template <class T>
 const T & deque <T> :: back() const 
 {
-   return *(new T);
+   return data[numElements-1];
 }
 template <class T>
 T& deque <T> ::back()
